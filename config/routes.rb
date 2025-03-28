@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
+  get "dashboard/index"
   root 'users#index'
   
   resources :users, only: [:new, :create, :show, :index]
   resources :sessions, only: [:new, :create, :destroy]
   resources :habits do
-    resources :time_blocks, only: [:new, :create, :index]
+    resources :time_blocks, only: [:new, :create, :index, :edit, :update] do
+      member do
+        patch :start   # 开始时间块
+        patch :finish  # 结束时间块
+      end
+    end
   end
+
   resources :categories, only: [:index]
   
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  get 'dashboard', to: 'dashboard#index'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
