@@ -1,5 +1,5 @@
 class HabitsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :show, :edit, :update, :destroy]
+  # skip_before_action :verify_authenticity_token, only: [:create, :show, :edit, :update, :destroy]
   before_action :authenticate_user!  # 需要登录
   before_action :set_habit, only: [:show, :edit, :update, :destroy]
 

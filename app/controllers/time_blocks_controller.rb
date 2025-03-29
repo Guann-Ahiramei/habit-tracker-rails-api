@@ -1,7 +1,7 @@
 class TimeBlocksController < ApplicationController
   # skip_before_action :verify_authenticity_token, only: [:create, :start, :finish, :update, :set_habit, :set_time_block]
   # before_action :authenticate_user!
-  skip_before_action :verify_authenticity_token, only: [:start, :finish,:create, :start, :update,:set_time_block]
+  # skip_before_action :verify_authenticity_token, only: [:start, :finish,:create, :start, :update,:set_time_block]
   before_action :set_habit
   before_action :set_time_block, only: [:edit, :update, :start, :finish]
 

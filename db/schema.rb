@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_21_222440) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_28_161927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,6 +29,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_222440) do
     t.index ["habit_id"], name: "index_categories_habits_on_habit_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_follows_on_followed_id"
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
+
   create_table "habits", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -36,6 +45,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_222440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_habits_on_user_id"
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.bigint "habit_id", null: false
+    t.datetime "reminder_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_reminders_on_habit_id"
   end
 
   create_table "time_blocks", force: :cascade do |t|
@@ -59,6 +76,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_222440) do
 
   add_foreign_key "categories_habits", "categories"
   add_foreign_key "categories_habits", "habits"
+  add_foreign_key "follows", "users", column: "followed_id"
+  add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "habits", "users"
+  add_foreign_key "reminders", "habits"
   add_foreign_key "time_blocks", "habits"
 end

@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:index]
+  # skip_before_action :verify_authenticity_token, only: [:index]
   before_action :authenticate_user!
   
   def index

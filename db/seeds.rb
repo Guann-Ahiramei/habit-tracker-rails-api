@@ -38,3 +38,28 @@ categories.each do |category_name, habit_names|
     category.habits << habit
   end
 end
+# 创建提醒任务
+# 获取多伦多时区当前日期
+toronto_time_zone = ActiveSupport::TimeZone['Eastern Time (US & Canada)']
+today = toronto_time_zone.today
+
+# 确保至少有一个habit存在
+habit = Habit.first || Habit.create!(name: "Default Habit", description: "Sample habit")
+
+# 创建三个提醒（多伦多时间今晚7、8、9点）
+Reminder.create!(
+  habit: habit,
+  reminder_time: toronto_time_zone.local(today.year, today.month, today.day, 19) # 晚上7点
+)
+
+Reminder.create!(
+  habit: habit,
+  reminder_time: toronto_time_zone.local(today.year, today.month, today.day, 20) # 晚上8点
+)
+
+Reminder.create!(
+  habit: habit,
+  reminder_time: toronto_time_zone.local(today.year, today.month, today.day, 21) # 晚上9点
+)
+
+puts "成功创建了 #{Reminder.count} 条提醒记录"

@@ -2,9 +2,16 @@ Rails.application.routes.draw do
   get "dashboard/index"
   root 'users#index'
   
-  resources :users, only: [:new, :create, :show, :index]
+  resources :users do
+    member do
+      post 'follow'
+      post 'unfollow'
+    end
+  end
+  resources :follows, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :habits do
+    resources :reminders, only: [:create, :destroy]
     resources :time_blocks, only: [:new, :create, :index, :edit, :update] do
       member do
         patch :start   # 开始时间块
