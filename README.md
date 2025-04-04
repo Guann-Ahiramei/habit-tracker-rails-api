@@ -1,24 +1,54 @@
-# README
+# Habit Tracker
+Rails MVC project.
+Habit tracker allows users to log in, add habits to specific categories, view a statistics dashboard, set email reminders, and check in/out of habits.
+## Key Features
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. **Model Relationships**:
+   - *One-to-One*: Implemented in the `Follow` model.
+   - *One-to-Many*: Exists between `User` ↔ `Habit`, `Habit` ↔ `TimeBlock`, and `Habit` ↔ `Reminder`.
+   - *Many-to-Many*: Used for `Habit` ↔ `Category`.
+   - *Rich Associations* (One-to-Many/Many-to-Many with metadata): Applied to `User` ↔ `Follow` and `Habit` ↔ `Category` (via join tables).
 
-Things you may want to cover:
+2. **Session Management**:
+   - User login state is controlled via sessions.
 
-* Ruby version
+3. **Code Efficiency**:
+   - Follows DRY principles with partials (e.g., reusable TimeBlocks form for habit logging).
 
-* System dependencies
+4. **Styling Approach**:
+   - Uses Tailwind CSS with stylesheet-based styling (avoids inline CSS).
 
-* Configuration
+5. **Test Credentials**:
+   > **Username**: user2@example.com  
+   > **Password**: password
 
-* Database creation
+6. **Test Data**:
+   - Seed files generate mock data for testing.
 
-* Database initialization
+---
 
-* How to run the test suite
+## Application Flow
 
-* Services (job queues, cache servers, search engines, etc.)
+### 1. User Authentication
+- Login/registration handled by `SessionsController`.
+- Successful login redirects to the `DashboardController` homepage.
 
-* Deployment instructions
+### 2. Habit Management
+- Users create/view/edit/delete habits via `HabitsController`.
+- Each habit can link to one or more categories (through `CategoriesHabit` model).
 
-* ...
+### 3. Category Management
+- Users organize habits using `CategoriesController`.
+
+### 4. Reminders
+- Email reminders (via `RemindersController`) help track habit progress.
+
+### 5. Time Blocking
+- `TimeBlocksController` manages habit schedules (start/end times) and logs reasons for missed habits.
+
+### 6. Social Features
+- Users follow others (`FollowsController`) to view their habits/progress.
+
+### 7. View Rendering
+- Global methods/filters are provided by `ApplicationController`.
+- Helper methods (in `helpers/`) simplify view logic.

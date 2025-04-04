@@ -27,8 +27,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    render :index, notice: "login successfully"
+    if params[:search].present?
+      @searched_user = User.where("email LIKE ?", "%#{params[:search]}%").where.not(id: current_user.id).first
+    end
+    @followers = current_user.followers
+    @followed_users = current_user.followed_users
+    @weekly_habit_stats = calculate_weekly_habit_stats(@followed_users)
   end
 
   def follow
@@ -49,16 +53,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :role)
   end
 
-  def habit_completion_rate(user, period:)
-    time_range =
-      case period
-      when :daily then Time.zone.today.all_day
-      when :weekly then Time.zone.today.beginning_of_week..Time.zone.today.end_of_week
-      end
+  def calculate_weekly_habit_stats(users)
+    start_of_week = Time.current.beginning_of_week
+    end_of_week = Time.current.end_of_week
 
-    total_timeblocks = TimeBlock.joins(:habit).where(habits: { user_id: user.id }, start_time: time_range).count
-    completed_timeblocks = TimeBlock.joins(:habit).where(habits: { user_id: user.id }, start_time: time_range, completed: true).count
-
-    total_timeblocks.positive? ? (completed_timeblocks.to_f / total_timeblocks * 100).round(2) : 0
+    users.map do |user|
+      completed_count = user.habits.joins(:time_blocks)
+                              .where(time_blocks: { completed: true, start_time: start_of_week..end_of_week })
+                              .count
+      { user: user, completed_count: completed_count }
+    end
   end
 end

@@ -9,6 +9,7 @@
 
 <h3>Create Habits:</h3>
 <%= form_with(model: [@category, @habit], local: true) do |form| %>
+  <%= form.hidden_field :category_id, value: @category.id %>
   <div>
     <%= form.label :name, "Name" %>
     <%= form.text_field :name %>

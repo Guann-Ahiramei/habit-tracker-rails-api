@@ -62,4 +62,4 @@ Reminder.create!(
   reminder_time: toronto_time_zone.local(today.year, today.month, today.day, 21) # 晚上9点
 )
 
-puts "成功创建了 #{Reminder.count} 条提醒记录"
+puts "Successfully created #{Reminder.count} reminders"

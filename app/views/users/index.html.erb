@@ -1,27 +1,42 @@
-<div>
-  <h1 class="font-bold text-4xl">Users#index</h1>
-  <p>Find me in app/views/users/index.html.erb</p>
-  <h2>搜索用户</h2>
-  <%= form_with url: users_path, method: :get, local: true do |form| %>
-    <%= form.label :query, "邮箱：" %>
-    <%= form.text_field :query %>
-    <%= form.submit "搜索" %>
+<h1 class="text-2xl font-bold mb-4">Users</h1>
+
+<!-- 搜索功能 -->
+<%= form_with url: users_path, method: :get, local: true, class: "mb-6" do |form| %>
+  <div class="flex items-center">
+    <%= form.text_field :search, placeholder: "Search by email", class: "border rounded px-4 py-2 w-full" %>
+    <%= form.submit "Search", class: "bg-blue-500 text-white px-4 py-2 rounded ml-2" %>
+  </div>
+<% end %>
+
+<!-- 搜索结果 -->
+<% if @searched_user %>
+  <h2 class="text-xl font-bold mt-8">Search Result</h2>
+  <div class="p-4 bg-white shadow-md rounded-lg flex justify-between items-center">
+    <div>
+      <p class="font-bold text-gray-800"><%= @searched_user.email %></p>
+    </div>
+    <div>
+      <% if current_user.followed_users.include?(@searched_user) %>
+        <%= button_to 'Unfollow', follow_path(@searched_user), method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded" %>
+      <% else %>
+        <%= button_to 'Follow', follows_path(followed_id: @searched_user.id), method: :post, class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<h2 class="text-xl font-bold mt-8">Follwers</h2>
+<%= render partial: 'user_list', locals: { users: @followers }%>
+
+<h2 class="text-xl font-bold mt-8">Followed Users</h2>
+<%= render partial: 'user_list', locals: { users: @followed_users } %>
+
+<h2 class="text-xl font-bold mt-8">Friends' Weekly Habit Stats</h2>
+<ul class="space-y-4">
+  <% @weekly_habit_stats.each do |stat| %>
+    <li class="p-4 bg-green-100 shadow-md rounded-lg">
+      <p class="font-bold text-gray-800"><%= stat[:user].email %></p>
+      <p class="text-gray-600">Completed Habits This Week: <%= stat[:completed_count] %></p>
+    </li>
   <% end %>
-
-  <h2>搜索结果</h2>
-  <ul>
-    <% @users.each do |user| %>
-      <li>
-        <%= user.email %>
-        <% if current_user && current_user.follows_as_follower.include?(user) %>
-            <%= button_to "取消关注", follows_path(user), method: :delete %>
-        <% elsif current_user %>
-            <%= button_to "关注", follows_path(followed_id: user.id), method: :post %>
-        <% else %>
-            <%= link_to "登录后关注", new_user_session_path %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-
-</div>
+</ul>
