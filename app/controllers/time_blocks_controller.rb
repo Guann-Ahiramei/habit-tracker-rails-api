@@ -1,5 +1,5 @@
 class TimeBlocksController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:create, :start, :finish, :update, :set_habit, :set_time_block]
+  # skip_before_action :verify_authenticity_token, only: [:create, :start, :finish, :update]
   # before_action :authenticate_user!
   # skip_before_action :verify_authenticity_token, only: [:start, :finish,:create, :start, :update,:set_time_block]
   before_action :set_habit
@@ -28,9 +28,9 @@ class TimeBlocksController < ApplicationController
   def create
     @time_block = @habit.time_blocks.new(time_block_params)
     if @time_block.save
-      render json: @time_block, status: :created
+      redirect_to habit_path(@habit), notice: 'Time block created successfully.'
     else
-      render json: @time_block.errors, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -48,13 +48,7 @@ class TimeBlocksController < ApplicationController
 
   private
 
-  # def set_habit
-  #   Rails.logger.info "Calling set_habit with params: #{params.inspect}"
-  #   @habit = current_user.habits.find(params[:habit_id])
-  # end
-
   def set_habit
-    Rails.logger.info "Finding habit with ID: #{params[:habit_id]}"
     @habit = Habit.find(params[:habit_id])
   end
 

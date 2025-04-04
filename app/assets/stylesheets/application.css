@@ -8,3 +8,68 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    font-family: 'Georgia', serif; /* 使用 Georgia 字体 */
+    font-size: 1.25rem; /* 设置字体大小 */
+    font-style: italic; /* 设置斜体 */
+    color: #4a4a4a; /* 设置颜色 */
+    margin-bottom: 0.5rem; /* 添加下边距 */
+}
+
+/* 为三级标题设置独特的字体样式 */
+h3 {
+    font-family: 'Georgia', serif; /* 使用 Georgia 字体 */
+    font-size: 1.25rem; /* 设置字体大小 */
+    font-style: italic; /* 设置斜体 */
+    color: #4a4a4a; /* 设置颜色 */
+    margin-bottom: 0.5rem; /* 添加下边距 */
+}
+
+a {
+    color: #3498db; /* 链接文字颜色 */
+    text-decoration: underline; /* 添加下划线 */
+    
+    border: 1px solid transparent; /* 默认无边框 */
+    padding: 5px 10px; /* 添加内边距 */
+    border-radius: 5px; /* 添加圆角 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+a:hover {
+    text-decoration: none; /* 鼠标悬停时移除下划线 */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* 按键样式 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid #3498db; /* 添加边框 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    border-color: #2980b9; /* 修改边框颜色 */
+}

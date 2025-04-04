@@ -14,14 +14,14 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     # unless current_user
-    #   redirect_to login_path, alert: "请先登录"
+    #   redirect_to login_path, alert: "please log in first"
     # end
 
     
     puts "Checking authentication: Current User - #{current_user.inspect}"
     unless current_user
       puts "User not authenticated, redirecting..."
-      redirect_to login_path, alert: "请先登录"
+      redirect_to login_path, alert: "Please log in first."
     end
   end
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "dashboard/index"
-  root 'users#index'
+  root 'sessions#new'
   
   resources :users do
     member do
@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   end
   resources :follows, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :habits do
-    resources :reminders, only: [:create, :destroy]
+  resources :habits, except: [:new, :create] do
+    resources :reminders, only: [:new, :create, :index, :destroy]
     resources :time_blocks, only: [:new, :create, :index, :edit, :update] do
       member do
         patch :start   # 开始时间块
@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories, only: [:index]
+  resources :categories, only: [:index] do
+    resources :habits, only: [:new, :create]
+  end
   
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

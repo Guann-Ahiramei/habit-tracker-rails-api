@@ -15,19 +15,13 @@
 </ul>
 <%= link_to 'Add Time Block', new_habit_time_block_path(@habit), class: "bg-green-500 text-white px-4 py-2 rounded" %>
 
-<h2>设置提醒</h2>
-<%= form_with model: [@habit, Reminder.new], local: true do |form| %>
-  <%= form.label :reminder_time, "提醒时间" %>
-  <%= form.datetime_select :reminder_time %>
-  <%= form.submit "添加提醒" %>
-<% end %>
-
-<h2>已有提醒</h2>
+<h2>Reminders</h2>
 <ul>
   <% @habit.reminders.each do |reminder| %>
     <li>
       <%= reminder.reminder_time.strftime("%Y-%m-%d %H:%M") %>
-      <%= link_to "删除", habit_reminder_path(@habit, reminder), method: :delete, data: { confirm: "确定删除？" } %>
+      <%= button_to "Delete", habit_reminder_path(@habit, reminder), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-500" %>
     </li>
   <% end %>
 </ul>
+<%= link_to 'Add Reminder', new_habit_reminder_path(@habit), class: "bg-blue-500 text-white px-4 py-2 rounded" %>

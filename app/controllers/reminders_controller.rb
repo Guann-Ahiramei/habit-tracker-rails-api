@@ -1,6 +1,11 @@
 class RemindersController < ApplicationController
   # skip_before_action :verify_authenticity_token, only: [:create, :destroy]
   before_action :set_habit
+
+  def new
+    @reminder = @habit.reminders.new
+  end
+
   def create
     @reminder = @habit.reminders.build(reminder_params)
     if @reminder.save

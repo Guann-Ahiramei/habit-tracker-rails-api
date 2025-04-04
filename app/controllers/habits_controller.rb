@@ -16,17 +16,20 @@ class HabitsController < ApplicationController
   end
 
   def new
-    @habit = current_user.habits.new
-    @categories = Category.all  # 供表单选择分类
+    @category = Category.find(params[:category_id]) # 获取当前类别
+    @habit = @category.habits.new                  # 基于类别创建习惯
+    @habits = @category.habits                     # 获取该类别下的所有习惯
   end
 
   def create
-    @habit = current_user.habits.new(habit_params)
+    @category = Category.find(params[:category_id]) # 获取当前类别
+    @habit = @category.habits.new(habit_params)     # 基于类别创建习惯
+    @habit.user = current_user                      # 关联当前用户
+
     if @habit.save
-      @habit.categories << Category.where(id: params[:habit][:category_ids])
-      redirect_to @habit, notice: '习惯创建成功！'
+      redirect_to new_category_habit_path(@category), notice: '习惯创建成功！'
     else
-      @categories = Category.all
+      @habits = @category.habits                   # 如果失败，重新加载该类别的习惯
       render :new, status: :unprocessable_entity
     end
   end

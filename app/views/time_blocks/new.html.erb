@@ -9,6 +9,14 @@
     <%= form.datetime_select :end_time %>
   </div>
   <div>
+    <%= form.label :completed %>
+    <%= form.check_box :completed %>
+  </div>
+  <div>
+    <%= form.label :reason, "Reason (if incomplete)" %>
+    <%= form.text_area :reason, rows: 3, placeholder: "Provide a reason if the task is incomplete" %>
+  </div>
+  <div>
     <%= form.submit 'Save', class: "bg-blue-500 text-white px-4 py-2 rounded" %>
   </div>
 <% end %>

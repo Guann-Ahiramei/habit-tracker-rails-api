@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:create, :follow, :unfollow]
+  # skip_before_action :verify_authenticity_token, only: [:show, :index, :create, :follow, :unfollow]
   def new
     @user = User.new
   end

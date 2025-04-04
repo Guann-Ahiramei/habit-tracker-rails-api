@@ -13,10 +13,12 @@
     <% @users.each do |user| %>
       <li>
         <%= user.email %>
-        <% if current_user.followers.include?(user) %>
-          <%= button_to "取消关注", follows_path(user), method: :delete %>
+        <% if current_user && current_user.follows_as_follower.include?(user) %>
+            <%= button_to "取消关注", follows_path(user), method: :delete %>
+        <% elsif current_user %>
+            <%= button_to "关注", follows_path(followed_id: user.id), method: :post %>
         <% else %>
-          <%= button_to "关注", follows_path(followed_id: user.id), method: :post %>
+            <%= link_to "登录后关注", new_user_session_path %>
         <% end %>
       </li>
     <% end %>
