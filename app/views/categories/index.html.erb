@@ -1,9 +1,0 @@
-<h2>Select Category</h2>
-<ul>
-  <% @categories.each do |category| %>
-    <li>
-      <%= link_to category.name, new_category_habit_path(category) %>
-    </li>
-  <% end %>
-</ul>
-<a href="/categories/new" class="btn btn-primary">Create new category</a>

@@ -1,7 +1,0 @@
-<h2>编辑习惯</h2>
-<form action="/habits/<%= @habit.id %>" method="POST">
-  <input type="hidden" name="_method" value="PATCH">
-  <label>习惯名称</label>
-  <input type="text" name="habit[name]" value="<%= @habit.name %>" class="form-control">
-  <button type="submit" class="btn btn-warning mt-2">更新</button>
-</form>

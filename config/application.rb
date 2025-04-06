@@ -25,5 +25,12 @@ module HabitTracker
     # config.eager_load_paths << Rails.root.join("extras")
     config.active_job.queue_adapter = :sidekiq
 
+    # Set the application to API-only mode
+    config.api_only = true
+
+    # Add any additional middleware if needed (e.g., for session management)
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+
   end
 end
