@@ -52,10 +52,19 @@ gem 'devise_token_auth' # 用于 API 认证
 
 gem 'omniauth' # 用于第三方登录
 
+# 用swagger生成API文档
+gem "rswag", "~> 2.16"
+gem 'rswag-ui'
+gem 'rswag-api'
+
+# 跨域请求，前端和后端分离时需要
+gem 'rack-cors'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem 'rspec-rails', '~> 6.0.0'
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false

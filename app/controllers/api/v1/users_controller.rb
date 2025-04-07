@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  include Rails.application.routes.url_helpers
   # skip_before_action :verify_authenticity_token, only: [:show, :index, :create, :follow, :unfollow]
   def new
     @user = User.new
@@ -8,7 +9,12 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       avatar_url = url_for(@user.avatar) if @user.avatar.attached?
-      render json: { message: 'User created successfully', user: @user, avatar: avatar_url }, status: :created
+      render json: { 
+        message: 'User created successfully', 
+        user: @user, 
+        avatar_url: @user.avatar.attached? ? url_for(@user.avatar) : nil 
+        }, 
+        status: :created
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end

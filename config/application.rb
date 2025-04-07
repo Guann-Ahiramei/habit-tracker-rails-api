@@ -23,7 +23,7 @@ module HabitTracker
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :inline # Use inline for development, Sidekiq for production
 
     # Set the application to API-only mode
     config.api_only = true

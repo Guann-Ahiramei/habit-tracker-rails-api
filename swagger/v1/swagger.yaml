@@ -1,0 +1,1443 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "habit_tracker API",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+      "variables": {}
+    },
+    {
+      "url": "http://localhost:3000/api/v1",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/categories/6/habits": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "category_habit_create",
+        "description": "to create habits, you need to select a category first",
+        "operationId": "category_habit_create",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "from user_signin_devise API",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "from user_signin_devise API",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "from user_signin_devise API",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/category_habit_create_request"
+                  },
+                  {
+                    "example": {
+                      "habit": {
+                        "name": "Daily meditation",
+                        "description": "Exercise for 30 minutes every day"
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "habit": {
+                  "name": "Daily meditation",
+                  "description": "Exercise for 30 minutes every day"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "category_index",
+        "operationId": "category_index",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "habit_index",
+        "operationId": "habit_index",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/31": {
+      "patch": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "habit_update",
+        "operationId": "habit_update",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Habit"
+                  },
+                  {
+                    "example": {
+                      "name": "running",
+                      "description": "1 hour"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "name": "running",
+                "description": "1 hour"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "habit_delete",
+        "operationId": "habit_delete",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/32/time_blocks": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "timeblock_create",
+        "description": "When you track a habit, use a time block to record and monitor the process.",
+        "operationId": "timeblock_create",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/timeblock_create_request"
+                  },
+                  {
+                    "example": {
+                      "time_block": {
+                        "start_time": "2025-04-06T18:10:00",
+                        "end_time": "2025-04-06T19:10:00",
+                        "reason": "Test time block",
+                        "completed": false
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "time_block": {
+                  "start_time": "2025-04-06T18:10:00",
+                  "end_time": "2025-04-06T19:10:00",
+                  "reason": "Test time block",
+                  "completed": false
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/31/time_blocks/12/start": {
+      "patch": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "timeblock_start",
+        "operationId": "timeblock_start",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/31/time_blocks/12/finish": {
+      "patch": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "timeblock_finish",
+        "operationId": "timeblock_finish",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/31/time_blocks": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "timeblocks_index",
+        "operationId": "timeblocks_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/31/time_blocks/12": {
+      "patch": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "timeblocks_update",
+        "operationId": "timeblocks_update",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/timeblocks_update_request"
+                  },
+                  {
+                    "example": {
+                      "start_time": "2025-04-06T10:00:00Z",
+                      "end_time": "2025-04-06T11:00:00Z"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "start_time": "2025-04-06T10:00:00Z",
+                "end_time": "2025-04-06T11:00:00Z"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/47/reminders": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "reminder_create",
+        "operationId": "reminder_create",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/reminder_create_request"
+                  },
+                  {
+                    "example": {
+                      "reminder": {
+                        "reminder_time": "2025-04-08T07:00:00"
+                      }
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "reminder": {
+                  "reminder_time": "2025-04-08T07:00:00"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/habits/45/reminders/29": {
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "reminder_destroy",
+        "operationId": "reminder_destroy",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/users/10/follow": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_follow",
+        "description": "you can follow/unfollow a user through their user_id",
+        "operationId": "user_follow",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "from user_signin_devise API",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "from user_signin_devise API",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "from user_signin_devise API",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/users/10/unfollow": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_unfollow",
+        "operationId": "user_unfollow",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_signup_devise",
+        "description": "functions that comes with devise liabrary.",
+        "operationId": "user_signup_devise",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/user_signup_devise_request"
+                  },
+                  {
+                    "example": {
+                      "email": "guann0304@gmail.com",
+                      "password": "password",
+                      "password_confirmation": "password"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "guann0304@gmail.com",
+                "password": "password",
+                "password_confirmation": "password"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "http://localhost:3000/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/auth/sign_in": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_signin_devise",
+        "operationId": "user_signin_devise",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/user_signin_devise_request"
+                  },
+                  {
+                    "example": {
+                      "email": "guann0304@gmail.com",
+                      "password": "password"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "guann0304@gmail.com",
+                "password": "password"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/auth/validate_token": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_index_validateToken",
+        "operationId": "user_index_validateToken",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/auth/sign_out": {
+      "delete": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_logout_devise",
+        "operationId": "user_logout_devise",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_create",
+        "description": "insert user table without devise library",
+        "operationId": "user_create",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "enum": [
+                "multipart/form-data"
+              ],
+              "type": "string",
+              "example": "multipart/form-data"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "user[email]",
+                  "user[password]",
+                  "user[avatar]",
+                  "user[role]"
+                ],
+                "type": "object",
+                "properties": {
+                  "user[email]": {
+                    "type": "string",
+                    "example": "guann0304@gmail.com"
+                  },
+                  "user[password]": {
+                    "type": "string",
+                    "example": "password"
+                  },
+                  "user[avatar]": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "user[role]": {
+                    "type": "string",
+                    "example": "user"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_index",
+        "operationId": "user_index",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    },
+    "/users/9": {
+      "get": {
+        "tags": [
+          "Misc"
+        ],
+        "summary": "user_show",
+        "operationId": "user_show",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "zniGX-t_bX2FIrv0boyKew"
+            }
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "jammie.kunze@marks-stehr.example"
+            }
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "rw2_J-5B4vf3OtOMqmdPcA"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false,
+        "servers": [
+          {
+            "url": "https://habit-tracker-api-09c56081b06d.herokuapp.com/api/v1",
+            "variables": {}
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "category_habit_create_request": {
+        "title": "category_habit_create_request",
+        "required": [
+          "habit"
+        ],
+        "type": "object",
+        "properties": {
+          "habit": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Habit"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "habit": {
+            "name": "Daily meditation",
+            "description": "Exercise for 30 minutes every day"
+          }
+        }
+      },
+      "Habit": {
+        "title": "Habit",
+        "required": [
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "Daily meditation",
+          "description": "Exercise for 30 minutes every day"
+        }
+      },
+      "timeblock_create_request": {
+        "title": "timeblock_create_request",
+        "required": [
+          "time_block"
+        ],
+        "type": "object",
+        "properties": {
+          "time_block": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimeBlock"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "time_block": {
+            "start_time": "2025-04-06T18:10:00",
+            "end_time": "2025-04-06T19:10:00",
+            "reason": "Test time block",
+            "completed": false
+          }
+        }
+      },
+      "TimeBlock": {
+        "title": "TimeBlock",
+        "required": [
+          "start_time",
+          "end_time",
+          "reason",
+          "completed"
+        ],
+        "type": "object",
+        "properties": {
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          }
+        },
+        "example": {
+          "start_time": "2025-04-06T18:10:00",
+          "end_time": "2025-04-06T19:10:00",
+          "reason": "Test time block",
+          "completed": false
+        }
+      },
+      "timeblocks_update_request": {
+        "title": "timeblocks_update_request",
+        "required": [
+          "start_time",
+          "end_time"
+        ],
+        "type": "object",
+        "properties": {
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "start_time": "2025-04-06T10:00:00Z",
+          "end_time": "2025-04-06T11:00:00Z"
+        }
+      },
+      "reminder_create_request": {
+        "title": "reminder_create_request",
+        "required": [
+          "reminder"
+        ],
+        "type": "object",
+        "properties": {
+          "reminder": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Reminder"
+              },
+              {}
+            ]
+          }
+        },
+        "example": {
+          "reminder": {
+            "reminder_time": "2025-04-08T07:00:00"
+          }
+        }
+      },
+      "Reminder": {
+        "title": "Reminder",
+        "required": [
+          "reminder_time"
+        ],
+        "type": "object",
+        "properties": {
+          "reminder_time": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "reminder_time": "2025-04-08T07:00:00"
+        }
+      },
+      "user_signup_devise_request": {
+        "title": "user_signup_devise_request",
+        "required": [
+          "email",
+          "password",
+          "password_confirmation"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "password_confirmation": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "guann0304@gmail.com",
+          "password": "password",
+          "password_confirmation": "password"
+        }
+      },
+      "user_signin_devise_request": {
+        "title": "user_signin_devise_request",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "guann0304@gmail.com",
+          "password": "password"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [],
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}
