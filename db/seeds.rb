@@ -1,37 +1,64 @@
-# 清空数据库（可选，根据需求启用）
-User.destroy_all
-Habit.destroy_all
-Category.destroy_all
-CategoriesHabit.destroy_all
-Reminder.destroy_all
-Follow.destroy_all
+require 'faker'
+
+puts "Cleaning up database..."
+# 清空旧数据（开发环境下）
+# 清空顺序很重要：从依赖表到主表
 TimeBlock.destroy_all
+Reminder.destroy_all
+Habit.destroy_all
+Follow.destroy_all # 自连接表，必须清除！
+Category.destroy_all
+User.destroy_all
+puts "✅ Done."
 
-# 创建用户
-user1 = User.create!(email: "alice@example.com", password_digest: "password123", role: "user")
-user2 = User.create!(email: "bob@example.com", password_digest: "password456", role: "user")
+# 创建用户并附加头像
+puts "Creating users..."
+5.times do
+  user = User.create!(
+    email: Faker::Internet.unique.email,
+    password: "password",
+    role: "user"
+  )
 
-# 创建习惯
-habit1 = Habit.create!(name: "Morning Run", description: "Run 5km every morning", user: user1)
-habit2 = Habit.create!(name: "Read Books", description: "Read for 30 minutes daily", user: user2)
+  # 附加头像（你可以用默认图片）
+  user.avatar.attach(
+    io: File.open(Rails.root.join("app/assets/images/default_avatar.png")),
+    filename: "default_avatar.png",
+    content_type: "image/png"
+  )
+end
 
-# 创建类别
-category1 = Category.create!(name: "Health")
-category2 = Category.create!(name: "Education")
+# 创建分类
+puts "Creating categories..."
+categories = []
+%w[Health Productivity Learning Relaxation].each do |name|
+  categories << Category.create!(name: name)
+end
 
-# 关联习惯和类别
-CategoriesHabit.create!(habit: habit1, category: category1)
-CategoriesHabit.create!(habit: habit2, category: category2)
+# 创建习惯、提醒和时间段
+puts "Creating habits, reminders, and time blocks..."
+User.all.each do |user|
+  3.times do
+    habit = Habit.create!(
+      name: Faker::Verb.base.titleize,
+      description: Faker::Lorem.sentence,
+      user: user,
+      categories: categories.sample(2)
+    )
 
-# 创建提醒
-Reminder.create!(habit: habit1, reminder_time: Time.now + 6.hours)
-Reminder.create!(habit: habit2, reminder_time: Time.now + 10.hours)
+    Reminder.create!(
+      habit: habit,
+      reminder_time: Time.now + rand(1..12).hours
+    )
 
-# 创建关注关系（user2 关注 user1）
-Follow.create!(follower_id: user2.id, followed_id: user1.id)
+    TimeBlock.create!(
+      habit: habit,
+      start_time: Time.now,
+      end_time: Time.now + 30.minutes,
+      completed: [true, false].sample,
+      reason: Faker::Lorem.word
+    )
+  end
+end
 
-# 创建时间块
-TimeBlock.create!(habit: habit1, start_time: Time.now, end_time: Time.now + 1.hour, completed: true, reason: "Felt great!")
-TimeBlock.create!(habit: habit2, start_time: Time.now + 2.hours, end_time: Time.now + 3.hours, completed: false, reason: "Got distracted.")
-
-puts "Database seeding completed!"
+puts "✅ Seed completed."
