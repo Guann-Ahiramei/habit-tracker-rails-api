@@ -1,13 +1,13 @@
 class Api::V1::HabitsController < ApplicationController
   # skip_before_action :verify_authenticity_token, only: [:create, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!  # 需要登录
+  before_action :authenticate_api_v1_user!
   before_action :set_habit, only: [:show, :update, :destroy]
 
   def index
     if params[:category_id]
-      @habits = Habit.joins(:categories).where(categories: { id: params[:category_id] }, user_id: session[:user_id])
+      @habits = current_api_v1_user.habits.joins(:categories).where(categories: { id: params[:category_id] })
     else
-      @habits = Habit.where(user_id: session[:user_id])
+      @habits =  current_api_v1_user.habits
     end
     render json: @habits, status: :ok
   end
@@ -22,7 +22,7 @@ class Api::V1::HabitsController < ApplicationController
     return render json: { error: 'Category not found' }, status: :not_found unless category
 
     habit = Habit.new(habit_params)
-    habit.user = current_user
+    habit.user = current_api_v1_user
 
     if habit.save
       habit.categories << category
@@ -51,7 +51,7 @@ class Api::V1::HabitsController < ApplicationController
   private
 
   def set_habit
-    @habit = current_user.habits.find(params[:id])
+    @habit = current_api_v1_user.habits.find(params[:id])
   end
 
   def habit_params

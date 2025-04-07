@@ -1,12 +1,9 @@
 class ApplicationController < ActionController::API
-  helper_method :current_user
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
+        include DeviseTokenAuth::Concerns::SetUserByToken
+  helper_method :current_api_v1_user
 
   def authenticate_user!
-    unless current_user
+    unless current_api_v1_user
       render json: { error: "Unauthorized. Please log in." }, status: :unauthorized
     end
   end

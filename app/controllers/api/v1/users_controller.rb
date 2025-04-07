@@ -32,10 +32,10 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     if params[:search].present?
-      @searched_user = User.where("email LIKE ?", "%#{params[:search]}%").where.not(id: current_user.id).first
+      @searched_user = User.where("email LIKE ?", "%#{params[:search]}%").where.not(id: current_api_v1_user.id).first
     end
-    @followers = current_user.followers
-    @followed_users = current_user.followed_users
+    @followers = current_api_v1_user.followers
+    @followed_users = current_api_v1_user.followed_users
     @weekly_habit_stats = calculate_weekly_habit_stats(@followed_users)
 
     render json: {
@@ -48,12 +48,12 @@ class Api::V1::UsersController < ApplicationController
 
   def follow
     @user = User.find(params[:id])
-    if @user == current_user
+    if @user == current_api_v1_user
       render json: { error: "Can't follow yourself." }, status: :unprocessable_entity
       return
     end
-    unless current_user.followed_users.include?(@user)
-      if current_user.followed_users << @user
+    unless current_api_v1_user.followed_users.include?(@user)
+      if current_api_v1_user.followed_users << @user
         render json: { message: "You are now following #{@user.email}" }, status: :ok
       else
         render json: { error: "Failed to follow #{@user.email}" }, status: :unprocessable_entity
@@ -65,7 +65,7 @@ class Api::V1::UsersController < ApplicationController
 
   def unfollow
     @user = User.find(params[:id])
-    if current_user.followed_users.delete(@user)
+    if current_api_v1_user.followed_users.delete(@user)
       render json: { message: "You have unfollowed #{@user.email}" }, status: :ok
     else
       render json: { error: "Failed to unfollow #{@user.email}" }, status: :unprocessable_entity

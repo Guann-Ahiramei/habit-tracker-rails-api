@@ -1,5 +1,13 @@
 class User < ApplicationRecord
-  has_secure_password
+            # Include default devise modules.
+            devise :database_authenticatable, :registerable,
+                    :recoverable, :rememberable, :validatable,:omniauthable
+                #     :confirmable,
+            include DeviseTokenAuth::Concerns::User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   has_many :habits, dependent: :destroy
 
   # 关注关系
@@ -11,4 +19,11 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: %w[user admin] }
+
+  before_validation :set_default_role, on: :create
+
+  def set_default_role
+    self.role ||= 'user'
+  end
+
 end

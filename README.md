@@ -9,8 +9,8 @@ Habit tracker allows users to log in, add habits to specific categories, view a 
    - *Many-to-Many*: Used for `Habit` ↔ `Category`.
    - *Rich Associations* (One-to-Many/Many-to-Many with metadata): Applied to `User` ↔ `Follow` and `Habit` ↔ `Category` (via join tables).
 
-2. **Session Management**:
-   - User login state is controlled via sessions.
+2. **Tokens Management**:
+   - User login state is controlled via Devise.
 
 3. **Code Efficiency**:
    - Follows DRY principles with partials (e.g., reusable TimeBlocks form for habit logging).
