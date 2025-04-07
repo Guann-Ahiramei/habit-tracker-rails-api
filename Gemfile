@@ -60,6 +60,9 @@ gem 'rswag-api'
 # 跨域请求，前端和后端分离时需要
 gem 'rack-cors'
 
+# 种子数据生成
+gem 'faker'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
