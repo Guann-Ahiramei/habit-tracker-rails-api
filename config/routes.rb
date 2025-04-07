@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
       # ✅ 认证接口路径调整为 /api/v1/auth

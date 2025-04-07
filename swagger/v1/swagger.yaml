@@ -1,0 +1,206 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/auth":
+    post:
+      summary: User authentication
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '200':
+          description: Authenticated successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+              - email
+              - password
+  "/api/v1/categories":
+    get:
+      summary: List all categories
+      tags:
+      - Categories
+      responses:
+        '200':
+          description: Categories listed
+  "/api/v1/categories/{category_id}/habits":
+    post:
+      summary: Create a habit in a category
+      tags:
+      - Categories
+      parameters:
+      - name: category_id
+        in: path
+        description: Category ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Habit created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Exercise
+                description:
+                  type: string
+                  example: Daily workout
+              required:
+              - name
+  "/api/v1/habits/{habit_id}/reminders":
+    get:
+      summary: List reminders for a habit
+      tags:
+      - Habits
+      parameters:
+      - name: habit_id
+        in: path
+        description: Habit ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reminders listed
+    post:
+      summary: Create a reminder for a habit
+      tags:
+      - Habits
+      parameters:
+      - name: habit_id
+        in: path
+        description: Habit ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Reminder created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time:
+                  type: string
+                  format: time
+                  example: '08:00'
+              required:
+              - time
+  "/api/v1/habits/{habit_id}/reminders/{id}":
+    delete:
+      summary: Delete a reminder
+      tags:
+      - Habits
+      parameters:
+      - name: habit_id
+        in: path
+        description: Habit ID
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Reminder ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Reminder deleted
+  "/api/v1/habits/{habit_id}/time_blocks/{id}/start":
+    patch:
+      summary: Start a time block
+      tags:
+      - Habits
+      parameters:
+      - name: habit_id
+        in: path
+        description: Habit ID
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Time Block ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Time block started
+  "/api/v1/habits/{habit_id}/time_blocks/{id}/finish":
+    patch:
+      summary: Finish a time block
+      tags:
+      - Habits
+      parameters:
+      - name: habit_id
+        in: path
+        description: Habit ID
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Time Block ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Time block finished
+  "/api/v1/users/{id}/follow":
+    post:
+      summary: Follow a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User followed
+  "/api/v1/users/{id}/unfollow":
+    post:
+      summary: Unfollow a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User unfollowed
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
