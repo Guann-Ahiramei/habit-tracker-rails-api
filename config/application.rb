@@ -31,6 +31,7 @@ module HabitTracker
     # Add any additional middleware if needed (e.g., for session management)
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.load_defaults 6.1
 
     # 支持 DeviseTokenAuth 的跨域请求头（返回 access-token 等）
     config.middleware.use Rack::MethodOverride

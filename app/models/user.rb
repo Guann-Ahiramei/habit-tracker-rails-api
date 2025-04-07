@@ -17,8 +17,11 @@ class User < ApplicationRecord
   has_many :follows_as_followed, class_name: 'Follow', foreign_key: 'followed_id'
   has_many :followers, through: :follows_as_followed, source: :follower
 
+  has_one_attached :avatar
+
   validates :email, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: %w[user admin] }
+  validate :acceptable_avatar
 
   before_validation :set_default_role, on: :create
 
@@ -26,4 +29,18 @@ class User < ApplicationRecord
     self.role ||= 'user'
   end
 
+  private
+
+  def acceptable_avatar
+    return unless avatar.attached?
+
+    unless avatar.byte_size <= 1.megabyte
+      errors.add(:avatar, "is too big. Maximum size is 1MB.")
+    end
+
+    acceptable_types = ["image/jpeg", "image/png"]
+    unless acceptable_types.include?(avatar.content_type)
+      errors.add(:avatar, "must be a JPEG or PNG.")
+    end
+  end
 end

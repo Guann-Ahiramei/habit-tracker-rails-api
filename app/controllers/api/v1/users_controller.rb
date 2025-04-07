@@ -7,7 +7,8 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      render json: { message: 'User created successfully', user: @user }, status: :created
+      avatar_url = url_for(@user.avatar) if @user.avatar.attached?
+      render json: { message: 'User created successfully', user: @user, avatar: avatar_url }, status: :created
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -15,6 +16,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    avatar_url = url_for(@user.avatar) if @user.avatar.attached?
     @friends_stats = @user.followed_users.map do |friend|
       {
         friend: friend,
@@ -24,6 +26,7 @@ class Api::V1::UsersController < ApplicationController
     end
     render json: {
       user: @user,
+      avatar: avatar_url,
       friends_stats: @friends_stats,
       followed_users: @user.followed_users,
       followers: @user.followers
@@ -75,7 +78,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :role)
+    params.require(:user).permit(:email, :password, :role, :avatar)
   end
 
   def calculate_weekly_habit_stats(users)

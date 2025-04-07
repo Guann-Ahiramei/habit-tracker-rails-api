@@ -83,3 +83,6 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
+
+#生产环境中的 URL 生成设置默认的主机地址（host）在这里部署了heroku的habit-tracker-rails应用程序
+Rails.application.routes.default_url_options[:host] = ENV['HOST_URL']
