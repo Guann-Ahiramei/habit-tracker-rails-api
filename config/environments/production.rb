@@ -53,7 +53,7 @@ Rails.application.configure do
 # 使用默认队列（inline 是开发用的同步队列，生产推荐 Sidekiq + Redis）
   config.active_job.queue_adapter = :inline
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "habit-tracker-api-09c56081b06d.herokuapp.com/" , protocol: 'https}
+  config.action_mailer.default_url_options = { host: "habit-tracker-api-09c56081b06d.herokuapp.com/" , protocol: 'https'}
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
