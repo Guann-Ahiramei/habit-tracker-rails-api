@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   include Rails.application.routes.url_helpers
+  before_action :authenticate_api_v1_user!, only: [:follow, :unfollow, :index, :show]
   # skip_before_action :verify_authenticity_token, only: [:show, :index, :create, :follow, :unfollow]
   def new
     @user = User.new
