@@ -1,3 +1,14 @@
+# Monkey patch preview_path= early to prevent ActionMailer crash
+module ActionMailer
+  class Base
+    class << self
+      def preview_path=(value)
+        puts "[DEBUG] someone is trying to call preview_path= with: #{value.inspect}"
+      end
+    end
+  end
+end
+
 require_relative "boot"
 
 require "rails/all"

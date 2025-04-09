@@ -9,6 +9,7 @@ class Api::V1::RemindersController < ApplicationController
   def create
     @reminder = @habit.reminders.build(reminder_params)
     if @reminder.save
+      # ReminderJob.perform_later(@reminder.id) # Enqueue the job to send the reminder email
       render json: @reminder, status: :created
     else
       render json: @reminder.errors, status: :unprocessable_entity
