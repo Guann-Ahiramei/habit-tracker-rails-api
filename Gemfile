@@ -47,7 +47,7 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'redis'
 
-gem 'devise' # 用于用户认证
+gem 'devise', github: 'heartcombo/devise' # 用于用户认证
 gem 'devise_token_auth' # 用于 API 认证
 
 gem 'omniauth' # 用于第三方登录
